@@ -1,13 +1,13 @@
 {
   "name": "eventsim",
   "version": "0.0.1",
-  "description": "eventsim ========",
+  "description": "simulate DOM mouse and keyboard events without other dependencies",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha-phantomjs ./test/runner.html"
+    "test": "./node_modules/.bin/testee test/runner.html --browsers firefox"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,7 @@
     "browserify": "^6.3.3",
     "expect.js": "^0.3.1",
     "mocha": "^2.0.1",
-    "mocha-phantomjs": "^3.5.1",
+    "testee": "^0.1.7",
     "typescript": "^1.3.0"
   }
 }
