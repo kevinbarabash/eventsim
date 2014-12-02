@@ -1,0 +1,26 @@
+{
+  "name": "eventsim",
+  "version": "0.0.1",
+  "description": "eventsim ========",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kevinb7/eventsim.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kevinb7/eventsim/issues"
+  },
+  "homepage": "https://github.com/kevinb7/eventsim",
+  "devDependencies": {
+    "browserify": "^6.3.3",
+    "typescript": "^1.3.0"
+  }
+}
