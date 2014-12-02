@@ -42,7 +42,8 @@ describe("EventSim", function () {
     it("should simulate " + name + " events", function (done) {
       var listener = function (e) {
         console.log(e);
-        expect(e.keyIdentifier).to.be("a");
+        expect(e.key).to.be("a");
+        expect(e.char).to.be("A");
         expect(e.altKey).to.be(true);
         expect(e.shiftKey).to.be(true);
         expect(e.metaKey).to.be(true);
@@ -53,6 +54,7 @@ describe("EventSim", function () {
       document.body.addEventListener(name, listener);
       var options = {
         key: "a",
+        char: "A",
         altKey: true,
         shiftKey: true,
         metaKey: true,
