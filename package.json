@@ -2,7 +2,7 @@
   "name": "eventsim",
   "version": "0.0.1",
   "description": "simulate DOM mouse and keyboard events without other dependencies",
-  "main": "index.js",
+  "main": "lib/eventsim.js",
   "directories": {
     "test": "test"
   },
