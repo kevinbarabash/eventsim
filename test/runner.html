@@ -3,18 +3,27 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>EventSim Test Runner</title>
-    <script src="../dist/eventsim.js"></script>
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css"/>
 </head>
 <body>
 
+<div id="mocha"></div>
+<script src="../node_modules/mocha/mocha.js"></script>
+<script src="../node_modules/expect.js/index.js"></script>
+<script>mocha.setup('bdd')</script>
+
 </body>
 </html>
+<script src="../dist/eventsim.js"></script>
+<script src="eventsim-spec.js"></script>
 <script>
 
-    document.body.addEventListener("click", function (e) {
-        console.log(e);
-    });
-
-    EventSim.simulate(document.body, "click", { clientX: 400, clientY: 300 });
+    window.onload = function () {
+        if (window.mochaPhantomJS) {
+            mochaPhantomJS.run();
+        } else {
+            mocha.run();
+        }
+    };
 
 </script>
