@@ -5,6 +5,8 @@
 module EventSim {
 
     export interface Options {
+        bubbles?: boolean;
+        cancelable?: boolean;
         view?: Window;
     }
 
@@ -46,8 +48,7 @@ module EventSim {
     };
 
     export interface KeyboardOptions extends Options {
-        charCode?: number;
-        keyCode?: number;
+        key?: string;
         shiftKey?: boolean;
         altKey?: boolean;
         metaKey?: boolean;
@@ -93,8 +94,8 @@ module EventSim {
     // TODO: touch events
     // TODO: device orientation/motion events
 
-    export function simulate(target: EventTarget, name: string, options: Options);
-    export function simulate(target: EventTarget, name: string, options: Options) {
+    export function simulate(target: EventTarget, name: string, options: any);
+    export function simulate(target: EventTarget, name: string, options: any) {
 
         var event: Event;
 

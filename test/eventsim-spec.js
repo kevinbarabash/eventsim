@@ -6,62 +6,64 @@ describe("EventSim", function () {
     expect(true).to.be(true);
   });
 
-  // TODO: write these tests using a loop
-  // TODO: test location, modifier keys
+  function testMouseEvent(name) {
+    it("should simulate " + name + " events", function (done) {
+      var listener = function (e) {
+        expect(e.pageX).to.be(400);
+        expect(e.pageY).to.be(300);
+        expect(e.x).to.be(400);
+        expect(e.y).to.be(300);
+        expect(e.altKey).to.be(true);
+        expect(e.shiftKey).to.be(true);
+        expect(e.metaKey).to.be(true);
+        expect(e.ctrlKey).to.be(true);
+        document.body.removeEventListener(name, listener);
+        done();
+      };
+      document.body.addEventListener(name, listener);
+      var options = {
+        clientX: 400,
+        clientY: 300,
+        altKey: true,
+        shiftKey: true,
+        metaKey: true,
+        ctrlKey: true
+      };
+      EventSim.simulate(document.body, name, options);
+    });
+  }
+
   describe("MouseEvents", function () {
-    it("should simulate click events", function () {
-
-    });
-
-    it("should simulate dblclick events", function () {
-
-    });
-
-    it("should simulate mousedown events", function () {
-
-    });
-
-    it("should simulate mousemove events", function () {
-
-    });
-
-    it("should simulate mouseup events", function () {
-
-    });
-
-    it("should simulate mouseup events", function () {
-
-    });
-
-    it("should simulate mouseover events", function () {
-
-    });
-
-    it("should simulate mouseout events", function () {
-
-    });
-
-    it("should simulate mouseenter events", function () {
-
-    });
-
-    it("should simulate mouseleave events", function () {
-
-    });
+    var mouseEvents = [ "click", "dblclick", "mouseup", "mousedown", "mousemove", "mouseover", "mouseout", "mouseenter", "mouseleave" ];
+    mouseEvents.forEach(testMouseEvent, this);
   });
 
-  // TODO: test charCode, keyCode, and modifier keys
+  function testKeyboardEvent(name) {
+    it("should simulate " + name + " events", function (done) {
+      var listener = function (e) {
+        console.log(e);
+        expect(e.keyIdentifier).to.be("a");
+        expect(e.altKey).to.be(true);
+        expect(e.shiftKey).to.be(true);
+        expect(e.metaKey).to.be(true);
+        expect(e.ctrlKey).to.be(true);
+        document.body.removeEventListener(name, listener);
+        done();
+      };
+      document.body.addEventListener(name, listener);
+      var options = {
+        key: "a",
+        altKey: true,
+        shiftKey: true,
+        metaKey: true,
+        ctrlKey: true
+      };
+      EventSim.simulate(document.body, name, options);
+    });
+  }
+
   describe("KeyboardEvents", function () {
-    it("should simulate keyup events", function () {
-
-    });
-
-    it("should simulate keydown events", function () {
-
-    });
-
-    it("should simulate keypress events", function () {
-
-    });
+    var keyboardEvents = [ "keyup", "keydown", "keypress" ];
+    keyboardEvents.forEach(testKeyboardEvent, this);
   });
 });

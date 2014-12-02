@@ -1,17 +1,40 @@
 declare module EventSim {
     interface Options {
-        altKey?: boolean;
-        shiftKey?: boolean;
-        ctrlKey?: boolean;
-        metaKey?: boolean;
+        bubbles?: boolean;
+        cancelable?: boolean;
+        view?: Window;
     }
     interface MouseOptions extends Options {
-        clientX: number;
-        clientY: number;
+        screenX?: number;
+        screenY?: number;
+        clientX?: number;
+        clientY?: number;
+        ctrlKey?: boolean;
+        shiftKey?: boolean;
+        altKey?: boolean;
+        metaKey?: boolean;
+        button?: number;
+    }
+    interface PointerOptions extends MouseOptions {
+        width?: number;
+        height?: number;
+        rotation?: number;
+        pressure?: number;
+        pointerType?: any;
+        pointerId?: number;
+        isPrimary?: boolean;
+        tiltX?: number;
+        tiltY?: number;
+        intermediatePoints?: any;
+        currentPoint?: any;
+        hwTimestamp?: number;
     }
     interface KeyboardOptions extends Options {
-        charCode?: number;
-        keyCode?: number;
+        key?: string;
+        shiftKey?: boolean;
+        altKey?: boolean;
+        metaKey?: boolean;
+        button?: number;
     }
     function simulate(target: EventTarget, name: "click", options: MouseOptions): any;
     function simulate(target: EventTarget, name: "dblclick", options: MouseOptions): any;
@@ -22,9 +45,17 @@ declare module EventSim {
     function simulate(target: EventTarget, name: "mouseout", options: MouseOptions): any;
     function simulate(target: EventTarget, name: "mouseenter", options: MouseOptions): any;
     function simulate(target: EventTarget, name: "mouseleave", options: MouseOptions): any;
+    function simulate(target: EventTarget, name: "pointerdown", options: PointerOptions): any;
+    function simulate(target: EventTarget, name: "pointermove", options: PointerOptions): any;
+    function simulate(target: EventTarget, name: "pointerup", options: PointerOptions): any;
+    function simulate(target: EventTarget, name: "pointercancel", options: PointerOptions): any;
+    function simulate(target: EventTarget, name: "pointerover", options: PointerOptions): any;
+    function simulate(target: EventTarget, name: "pointerout", options: PointerOptions): any;
+    function simulate(target: EventTarget, name: "pointerenter", options: PointerOptions): any;
+    function simulate(target: EventTarget, name: "pointerleave", options: PointerOptions): any;
     function simulate(target: EventTarget, name: "keyup", options: KeyboardOptions): any;
     function simulate(target: EventTarget, name: "keydown", options: KeyboardOptions): any;
     function simulate(target: EventTarget, name: "keypress", options: KeyboardOptions): any;
-    function simulate(target: EventTarget, name: string, options: Options): any;
+    function simulate(target: EventTarget, name: string, options: any): any;
 }
 export = EventSim;
