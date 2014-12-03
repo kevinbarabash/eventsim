@@ -2,68 +2,104 @@
 
 describe("EventSim", function () {
 
-  it("should work", function () {
-    expect(true).to.be(true);
-  });
-
-  function testMouseEvent(name) {
-    it("should simulate " + name + " events", function (done) {
-      var listener = function (e) {
-        expect(e.pageX).to.be(400);
-        expect(e.pageY).to.be(300);
-        expect(e.altKey).to.be(true);
-        expect(e.shiftKey).to.be(true);
-        expect(e.metaKey).to.be(true);
-        expect(e.ctrlKey).to.be(true);
-        document.body.removeEventListener(name, listener);
-        done();
-      };
-      document.body.addEventListener(name, listener);
-      var options = {
-        clientX: 400,
-        clientY: 300,
-        altKey: true,
-        shiftKey: true,
-        metaKey: true,
-        ctrlKey: true
-      };
-      EventSim.simulate(document.body, name, options);
-    });
-  }
-
   describe("MouseEvents", function () {
     var mouseEvents = [ "click", "dblclick", "mouseup", "mousedown", "mousemove", "mouseover", "mouseout", "mouseenter", "mouseleave" ];
     mouseEvents.forEach(testMouseEvent, this);
   });
 
-  function testKeyboardEvent(name) {
-    it("should simulate " + name + " events", function (done) {
-      var listener = function (e) {
-        console.log(e);
-        expect(e.key).to.be("a");
-        //expect(e.char).to.be("A");  // doesn't pass on Firefox
-        expect(e.altKey).to.be(true);
-        expect(e.shiftKey).to.be(true);
-        expect(e.metaKey).to.be(true);
-        expect(e.ctrlKey).to.be(true);
-        document.body.removeEventListener(name, listener);
-        done();
-      };
-      document.body.addEventListener(name, listener);
+  describe("KeyboardEvents", function () {
+    describe("uppercase letters", function () {
+      var keyboardEvents = [ "keyup", "keydown", "keypress" ];
+      for (var i = 65; i < 91; i++) {
+        var char = String.fromCharCode(i);
+        var options = {
+          key: char.toLowerCase(),
+          char: char,
+          keyCode: i,
+          altKey: true,
+          shiftKey: true,
+          metaKey: true,
+          ctrlKey: true
+        };
+        keyboardEvents.forEach(function (type) {
+          testKeyboardEvent(type, options, char);
+        }, this);
+      }
+    });
+
+    describe("lowercase letters", function () {
+      var keyboardEvents = [ "keyup", "keydown", "keypress" ];
+      for (var i = 97; i < 123; i++) {
+        var char = String.fromCharCode(i);
+        var options = {
+          key: String.fromCharCode(i),
+          char: char,
+          keyCode: i,
+          altKey: true,
+          shiftKey: false,
+          metaKey: true,
+          ctrlKey: true
+        };
+        keyboardEvents.forEach(function (type) {
+          testKeyboardEvent(type, options, char);
+        }, this);
+      }
+    });
+
+    describe("left key", function () {
+      var keyboardEvents = [ "keyup", "keydown", "keypress" ];
       var options = {
-        key: "a",
-        char: "A",
+        keyCode: 37,
         altKey: true,
         shiftKey: true,
         metaKey: true,
         ctrlKey: true
       };
-      EventSim.simulate(document.body, name, options);
+      keyboardEvents.forEach(function (type) {
+        testKeyboardEvent(type, options);
+      }, this);
     });
-  }
 
-  describe("KeyboardEvents", function () {
-    var keyboardEvents = [ "keyup", "keydown", "keypress" ];
-    keyboardEvents.forEach(testKeyboardEvent, this);
+    describe("right key", function () {
+      var keyboardEvents = [ "keyup", "keydown", "keypress" ];
+      var options = {
+        keyCode: 39,
+        altKey: true,
+        shiftKey: true,
+        metaKey: true,
+        ctrlKey: true
+      };
+      keyboardEvents.forEach(function (type) {
+        testKeyboardEvent(type, options);
+      }, this);
+    });
+
+    describe("up key", function () {
+      var keyboardEvents = [ "keyup", "keydown", "keypress" ];
+      var options = {
+        keyCode: 38,
+        altKey: true,
+        shiftKey: true,
+        metaKey: true,
+        ctrlKey: true
+      };
+      keyboardEvents.forEach(function (type) {
+        testKeyboardEvent(type, options);
+      }, this);
+    });
+
+    describe("down key", function () {
+      var keyboardEvents = [ "keyup", "keydown", "keypress" ];
+      var options = {
+        keyCode: 40,
+        altKey: true,
+        shiftKey: true,
+        metaKey: true,
+        ctrlKey: true
+      };
+      keyboardEvents.forEach(function (type) {
+        testKeyboardEvent(type, options);
+      }, this);
+    });
   });
 });

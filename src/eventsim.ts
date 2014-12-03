@@ -2,6 +2,8 @@
  * Simulate DOM events
  */
 
+import createKeyboardEvent = require("./createKeyboardEvent");
+
 module EventSim {
 
     export interface Options {
@@ -100,16 +102,16 @@ module EventSim {
         var event: Event;
 
         if (mouseRegex.test(name)) {
-            event = new MouseEvent(name, options);
+            event = <Event> new MouseEvent(name, options);
         } else if (keyboardRegex.test(name)) {
-            event = new KeyboardEvent(name, options);
+            event = createKeyboardEvent(name, options);
+            //event = new KeyboardEvent(name, options);
         } else if (pointerRegex.test(name)) {
-            event = new PointerEvent(name, options);
+            event = <Event> new PointerEvent(name, options);
         }
 
         target.dispatchEvent(event);
     }
-
 }
 
 export = EventSim;
