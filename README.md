@@ -54,3 +54,5 @@ Support more events:
 - devicemotion
 - input ?
 - message ?
+
+Add *simulateEventAt(event, clientX, clientY)*.
